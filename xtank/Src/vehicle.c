@@ -324,7 +324,7 @@ int activate_vehicle(v)
 /* 
  * Try this if you don't have cbrt in your library...
  */
-#if defined(sequent) || defined(__hpux)
+#if defined(sequent) || defined(__hpux) || defined(linux)
 # define cbrt(n) pow(n, 1.0/3.0)
 #endif
 

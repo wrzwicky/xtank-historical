@@ -375,11 +375,17 @@ make_parent()
 #ifdef  S1024x864
     size.min_width = 1024;
     size.min_height = 864;
-#else				/* S1024x864 */
-    /* S640x400 better be defined */
+#endif
+
+#ifdef S800x600
+    size.min_width = 800;
+    size.min_height = 600;
+#endif
+
+#ifdef S640x400
     size.min_width = 640;
     size.min_height = 400;
-#endif				/* S1024x864 */
+#endif
 
     size.max_width = DisplayWidth(vid->dpy, DefaultScreen(vid->dpy));
     size.max_height = DisplayHeight(vid->dpy, DefaultScreen(vid->dpy));
@@ -701,7 +707,7 @@ get_events(num_events, event)
 		    		key_xevent = &xevent.xkey;
 		    		if (XLookupString(key_xevent, buf, 1, NULL, NULL) == 0)
 					break;
-		    		if (!isprint(buf[0]) && buf[0] != '\r' && buf[0] != 127)
+		    		if (!isprint(buf[0]) && buf[0] != '\r' && buf[0] != 127 && buf[0] != 8)
 					break;
 
 		    		/* Add a key event to the array */
@@ -835,8 +841,10 @@ make_gcs()
     /* Only needs to be done *once* */
     XrmInitialize();
     rmdbstring = XResourceManagerString(vid->dpy);
+    /*
     if (!rmdbstring)
 	fprintf(stderr, "Someone has no x resources...\n");
+    */
     xrmdb = XrmGetStringDatabase(rmdbstring ? rmdbstring : "");
     res_name[0] = XrmStringToName("xtank");
     res_class[0] = XrmStringToClass("XTank");
@@ -855,7 +863,7 @@ make_gcs()
 #endif
     fc = get_default("foreground", "Foreground", (char *)NULL);
     bc = get_default("background", "Background", (char *)NULL);
-    rv = get_default("reverseVideo", "ReverseViedo", (char *)NULL);
+    rv = get_default("reverseVideo", "ReverseVideo", (char *)NULL);
 
     /* Get foreground and background pixel values */
     if (rv != NULL &&

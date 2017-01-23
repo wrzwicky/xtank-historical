@@ -69,7 +69,6 @@ $Log: message.c,v $
 extern Terminal *term;
 
 
-#ifdef S1024x864
 /* Menu locations */
 #define RECIPIENT_X 15
 #define RECIPIENT_Y 22
@@ -90,7 +89,6 @@ extern Terminal *term;
 
 /* Row of game window that the sending message is displayed */
 #define SENDING_ROW 17
-#endif
 
 /* Message display string length is 9 more than the data length */
 #define MAX_MESSAGE_LEN (MAX_DATA_LEN+9)

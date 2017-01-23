@@ -11,6 +11,9 @@ $Author: lidl $
 $Id: thread.c,v 2.22 1992/09/13 06:49:20 lidl Exp $
 
 $Log: thread.c,v $
+ * Revision 2.23  1992/09/20  14:37:00  sinster
+ * added Linux threading
+ *
  * Revision 2.22  1992/09/13  06:49:20  lidl
  * fixed the 386BSD threading
  *
@@ -175,14 +178,15 @@ Thread *(*func) ();
 	/* Modify current state's stack pointer in jmp_buf state */
 	bufend = (unsigned int) buf + bufsize - 1 - sizeof(thd->state);
 
-	/* Set stack pointer in jmp_buf to bufend. This is extremely machine and
-	   OS dependent. Often you can find out what register of the jmp_buf has
-	   the stack pointer by looking in /usr/include/setjmp.h on your machine.
-	   It is a good idea to make this number 32-bit (or sometimes 64-bit)
-	   aligned.  You also need to know whether your stack grows upwards
-	   (increasing address values) or downwards, to determine whether the
-	   stack pointer should start at the beginning or end of the empty space
-	   after the thread structure. */
+	/* Set stack pointer in jmp_buf to bufend. This is extremely
+	   machine and OS dependent. Often you can find out what
+	   register of the jmp_buf has the stack pointer by looking in
+	   /usr/include/setjmp.h on your machine.  It is a good idea
+	   to make this number 32-bit (or sometimes 64-bit) aligned.
+	   You also need to know whether your stack grows upwards
+	   (increasing address values) or downwards, to determine
+	   whether the stack pointer should start at the beginning or
+	   end of the empty space after the thread structure. */
 
 #if (defined(_IBMR2))
 	bufend = (bufend - 7) & ~7;
@@ -261,6 +265,11 @@ Thread *(*func) ();
 	/* this doesn't work quite right, yet */
 	thd->state[2] = bufend & ~3;
 	thd->state[3] = bufend & ~3;
+#endif
+
+#ifdef linux
+	/* Stack grows downwards.  Align to 32-bit boundary */
+	thd->state->__jmpbuf[JB_SP] = bufend & ~3;
 #endif
 
 #if defined(sequent) && defined(i386)

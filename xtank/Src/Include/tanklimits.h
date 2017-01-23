@@ -77,8 +77,11 @@ $Log: tanklimits.h,v $
 
 #define MAX_WEAPONS     6	/* number of weapons allowed on any one tank */
 
+#ifdef S800x600
+#define MAX_MESSAGES    7
+#else
 #define MAX_MESSAGES    8
-
+#endif
 
 #define MAX_ENGINES     16
 #define MAX_ARMORS      12

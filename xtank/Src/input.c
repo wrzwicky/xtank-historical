@@ -365,6 +365,7 @@ Event *event;
 			set_game_speed(settings.game_speed + 1);
 			break;
 
+#if 0
 		    case 'i':
 			sync_rate = 1;
 			break;
@@ -380,6 +381,7 @@ Event *event;
 		    case ']':
 			sync_rate = 16;
 			break;
+#endif
 #endif
 		    case 'W':
 			toggle_3d(TS_wide);
@@ -435,10 +437,12 @@ get_reply()
 	    switch (event.type) {
 		case EVENT_KEY:
 		    return (event.key);
+		    /* ignore buttons during text entry
 		case EVENT_LBUTTON:
 		case EVENT_MBUTTON:
 		case EVENT_RBUTTON:
 		    return '\r';
+		    */
 	    }
     }
 }
@@ -584,6 +588,7 @@ int col, row, font, max_length;
 	sync_output(FALSE);
 	next_char = get_reply();
 	switch (next_char) {
+	    case 8:
 	    case 127:
 		rlen = strlen(response);
 		if (rlen > 0) {

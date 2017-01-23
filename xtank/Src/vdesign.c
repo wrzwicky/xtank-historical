@@ -95,6 +95,13 @@ extern Terminal *term;
 #define VDESIGN_FONT  L_FONT
 #endif
 
+#ifdef S800x600
+#define VEH_X     150
+#define VEH_Y     75
+#define VEHICLE_SIZE  40
+#define VDESIGN_FONT  S_FONT
+#endif
+
 #ifdef S640x400
 #define VEH_X     150
 #define VEH_Y     75

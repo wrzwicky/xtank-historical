@@ -43,28 +43,26 @@ $Log: interface.h,v $
  * 
 */
 
-#ifdef S1024x864
 /* Menu coordinates */
-#define LEV0_Y          150
+#define LEV0_Y          140
 #define LEV0_X          15
-#define LEV1_X          190
-#define LEV2_X          380
-#define LEV3_X			570
+#define LEV1_X          168
+#define LEV2_X          344
 
 #define COMBATANTS_X    30
 #define COMBATANTS_Y    30
 #define GRID_X          110
 #define GRID_Y          30
-#define PLAYERS_X       50
-#define PLAYERS_Y       90
-#define PROGRAMS_X      170
-#define PROGRAMS_Y      90
-#define VEHICLES_X      290
-#define VEHICLES_Y      90
-#define TEAMS_X         450
-#define TEAMS_Y         90
-#define MAZES_X         420
-#define MAZES_Y         90
+#define PLAYERS_X       20
+#define PLAYERS_Y       70
+#define PROGRAMS_X      100
+#define PROGRAMS_Y      70
+#define VEHICLES_X      LEV2_X
+#define VEHICLES_Y      70
+#define TEAMS_X         350
+#define TEAMS_Y         70
+#define MAZES_X         LEV2_X
+#define MAZES_Y         LEV0_Y
 #define SETUPS_X        580
 #define SETUPS_Y        90
 
@@ -81,8 +79,8 @@ $Log: interface.h,v $
 #define UNDEFINED	255
 
 /* Asking questions coordinates in rows and columns */
-#define ASK_X		39
-#define ASK_Y		10
+#define ASK_X		30
+#define ASK_Y		40
 
 /* The standard font for the interface */
 #define INT_FONT	M_FONT
@@ -91,6 +89,25 @@ $Log: interface.h,v $
 #define DISP_Y 3
 #define DISP_WIDTH  80
 #define DISP_HEIGHT 46
+
+#ifdef S800x600
+
+#define LEV0_Y          140
+#define LEV0_X          15
+#define LEV1_X          136
+#define LEV2_X          284
+
+#define GRID_X          110
+#define GRID_Y          30
+
+#define INT_FONT	S_FONT
+
+#define DISP_X 		2
+#define DISP_Y 		2
+#define DISP_WIDTH	45
+#define DISP_HEIGHT	45
+
+#define TIER1_HEIGHT    134
 #endif
 
 #ifdef S640x400

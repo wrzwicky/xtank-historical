@@ -188,7 +188,7 @@ open_windows()
     int ret = 0;
 
     ret += make_window(ANIM_WIN, ANIM_WIN_X, ANIM_WIN_Y, ANIM_WIN_WIDTH,
-		       ANIM_WIN_HEIGHT, 0);
+		       ANIM_WIN_HEIGHT, BORDER);
     ret += make_window(GAME_WIN, GAME_WIN_X, GAME_WIN_Y, GAME_WIN_WIDTH,
 		       GAME_WIN_HEIGHT, BORDER);
     ret += make_window(CONS_WIN, CONS_WIN_X, CONS_WIN_Y, CONS_WIN_WIDTH,

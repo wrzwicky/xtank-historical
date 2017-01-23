@@ -1,22 +1,12 @@
-Send comments to xtank@eng.umd.edu                              13 Sept 1992
+Xtank
 
-The latest Xtank beta release is available via anonymous FTP on the
-hosts azathoth.sura.net and on ftp.eng.umd.edu, in the directory /pub/xtank.
 
-Be sure to read the builtin Release Notes.  Also, you should
-probably check out the FAQ answers that have been included.
+Modified for the North family by
 
-Please *NOTE* -- this is an beta quality release, as opposed
-to the last alpha quality release.  As such, we know
-there are bugs, and so forth, but feel that it is important
-to get this code out to people for them to play with it.
+James Cameron <quozl@us.netrek.org>
 
-PIX.COM Hacks (partial list):
-    Shooter hacking           - Josh Osborne
-    386BSD threading          - Kurt Lidl
-    New Window Layout         - Gordon Smith
+on 29th January 2001
 
-Contibuted Hacks (partial list):
-    RDF/TACLINK/HARM Fixes    - Aaron Eastlund
-    Damage system             - Aaron Eastlund
-    Other small fixes         - Many, many others
+
+
+

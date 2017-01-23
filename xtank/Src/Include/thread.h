@@ -11,6 +11,9 @@ $Author: lidl $
 $Id: thread.h,v 2.15 1992/09/07 18:50:50 lidl Exp $
 
 $Log: thread.h,v $
+ * Revision 2.16  1992/09/20  14:40:00  sinster
+ * added support for linux systems
+ *
  * Revision 2.15  1992/09/07  18:50:50  lidl
  * started support for 386bsd systems
  *
@@ -134,7 +137,7 @@ typedef struct _Thd
 #  define longjmp _longjmp
 # endif
 
-# if defined(mips) || defined(mmax) || defined(MOTOROLA) || defined(__hp9000s800) || defined(__386BSD__)
+# if defined(mips) || defined(mmax) || defined(MOTOROLA) || defined(__hp9000s800) || defined(__386BSD__) || defined(linux)
 typedef struct _Thd
 {
 	jmp_buf	state;		/* Current state of thread */

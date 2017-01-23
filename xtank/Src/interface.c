@@ -185,6 +185,7 @@ $Log: interface.c,v $
 #ifdef UNIX
 #include <sys/param.h>
 #include <sys/dir.h>
+#include <stdlib.h>
 #endif
 #include "clfkr.h"
 
@@ -440,34 +441,34 @@ init_interface()
     menu_sys_window(&menu_sys, ANIM_WIN);
 
     menu_norm_make(&menu_sys, MAIN_MENU, "XTANK", 10, 0,
-		   LEV0_X, LEV0_Y, main_entries, L_FONT);
+		   LEV0_X, LEV0_Y, main_entries, INT_FONT);
     menu_flag_make(&menu_sys, MACHINE_MENU, "Machines",
 		   number_of_machines, 0,
-		   LEV1_X, LEV0_Y, machine_entries, M_FONT);
+		   LEV1_X, LEV0_Y, machine_entries, INT_FONT);
     menu_norm_make(&menu_sys, PLAY_MENU, "Play", 4, 0,
-		   LEV1_X, LEV0_Y, play_entries, M_FONT);
+		   LEV1_X, LEV0_Y, play_entries, INT_FONT);
     menu_norm_make(&menu_sys, SETTINGS_MENU, "Settings", 
 		   (sizeof(settings_entries) / sizeof(char *)), 0, /* GHS */
-		   LEV1_X, LEV0_Y, settings_entries, M_FONT);
+		   LEV1_X, LEV0_Y, settings_entries, INT_FONT);
     menu_norm_make(&menu_sys, VIEW_MENU, "View", 5, 0,
-		   LEV1_X, LEV0_Y, view_entries, M_FONT);
+		   LEV1_X, LEV0_Y, view_entries, INT_FONT);
     menu_norm_make(&menu_sys, LOAD_MENU, "Load", 4, 0,
-		   LEV1_X, LEV0_Y, load_entries, M_FONT);
+		   LEV1_X, LEV0_Y, load_entries, INT_FONT);
     menu_norm_make(&menu_sys, DESIGN_MENU, "Design", 2, 0,
-		   LEV1_X, LEV0_Y, design_entries, M_FONT);
+		   LEV1_X, LEV0_Y, design_entries, INT_FONT);
     menu_norm_make(&menu_sys, HELP_MENU, "Help", 11, 0,
-		   LEV1_X, LEV0_Y, help_entries, M_FONT);
+		   LEV1_X, LEV0_Y, help_entries, INT_FONT);
     menu_nohil_make(&menu_sys, GAMES_MENU, "Games",
 			(sizeof(games_entries)/sizeof(char *)), 0,
-		    LEV2_X, LEV0_Y, games_entries, M_FONT);
+		    LEV2_X, LEV0_Y, games_entries, INT_FONT);
     menu_noti_make(&menu_sys, NUM_MENU, "", 11, 0,
-		   LEV2_X, LEV0_Y, num_entries, M_FONT);
+		   LEV2_X, LEV0_Y, num_entries, INT_FONT);
     menu_flag_make(&menu_sys, FLAGS_MENU, "Flags", 
 		   (sizeof(flags_entries) / sizeof(char *)), /* GHS */
-		   0, LEV3_X, LEV0_Y, flags_entries, M_FONT);
+		   0, LEV2_X, LEV0_Y, flags_entries, INT_FONT);
     menu_left_make(&menu_sys, FORCE_MENU, "Force Specials   Opt",
            (sizeof(force_entries) / sizeof(char *)),
-           0, LEV2_X, LEV0_Y, force_entries, M_FONT);
+           0, LEV2_X, LEV0_Y, force_entries, INT_FONT);
 
 	init_flags_hil();
 
@@ -511,7 +512,7 @@ init_comb_menus()
 	players_entries[i] = terminal[i]->player_name;
     }
 
-    grid_wid = 1 + MAX_COMB_WID * font_string_width("M", M_FONT);
+    grid_wid = 1 + MAX_COMB_WID * font_string_width("M", INT_FONT);
 
     for (i = 0; i < MAX_GRIDS; i++)
     {
@@ -522,7 +523,7 @@ init_comb_menus()
 	}
 	menu_recv_make(&menu_sys, grid_id[i], grid_entries[i], MAX_VEHICLES,
 		       grid_wid, GRID_X + (grid_wid + 1) * i, GRID_Y,
-		       grid_ent[i], M_FONT);
+		       grid_ent[i], INT_FONT);
 	menu_set_frame(&menu_sys, grid_id[i], 1);
     }
 
@@ -530,23 +531,23 @@ init_comb_menus()
 		   COMBATANTS_X, COMBATANTS_Y,
 		   done_entries, L_FONT);
     menu_nohil_make(&menu_sys, PLAYERS_MENU, "Players", num_terminals, 0,
-		    GRID_X, PLAYERS_Y + TIER1_HEIGHT,
-		    players_entries, M_FONT);
+		    GRID_X + (grid_wid * 0), PLAYERS_Y + TIER1_HEIGHT,
+		    players_entries, INT_FONT);
     menu_nohil_make(&menu_sys, PROGRAMS_MENU, "Programs", num_prog_descs, 0,
-		    GRID_X + (grid_wid), PROGRAMS_Y + TIER1_HEIGHT,
-		    programs_entries, M_FONT);
+		    GRID_X + (grid_wid * 1), PROGRAMS_Y + TIER1_HEIGHT,
+		    programs_entries, INT_FONT);
     menu_scroll_make(&menu_sys, VEHICLES_MENU, "Vehicles", num_vdescs, 0,
 		     GRID_X + (grid_wid * 2), VEHICLES_Y + TIER1_HEIGHT,
-		     vehicles_entries, M_FONT);
+		     vehicles_entries, INT_FONT);
     menu_nohil_make(&menu_sys, TEAMS_MENU, "Teams", 7, 0,
 		    GRID_X + (grid_wid * 3), TEAMS_Y + TIER1_HEIGHT,
-		    teams_entries, M_FONT);
+		    teams_entries, INT_FONT);
     menu_scroll_make(&menu_sys, MAZES_MENU, "Mazes", num_mdescs + 1, 0,
-		     GRID_X + (grid_wid * 2), MAZES_Y + TIER1_HEIGHT,
-		     mazes_entries, M_FONT);
+		     MAZES_X, MAZES_Y,
+		     mazes_entries, INT_FONT);
     menu_norm_make(&menu_sys, SETUPS_MENU, "Setups", num_sdescs, 0,
 		   SETUPS_X, SETUPS_Y + TIER1_HEIGHT,
-		   setups_entries, M_FONT);
+		   setups_entries, INT_FONT);
 }
 
 
@@ -1005,7 +1006,8 @@ main_interface()
 		}
 		else
 		{
-			sub_interface_play(0);
+		        /* select players mode by default - quozl */
+			sub_interface_play(1);
 		}
 
 		command_options.AutoStart = FALSE;
@@ -1594,10 +1596,10 @@ interface_play()
 	}
 	set_terminal(0);
 	if (!command_options.AutoStart)
-	{
-	iprint("Any key or button to continue", 0, line + 1);
-	wait_input();
-    }
+	  {
+	    iprint("Any key or button to continue", 0, line + 1);
+	    wait_input();
+	  }
     }
     expose_win(ANIM_WIN, TRUE);
     expose_win(GAME_WIN, TRUE);
@@ -1919,11 +1921,13 @@ get_player_info()
 
 	if (vid->kludge.player_name[0] == '\0') 
 	{
-		if (!command_options.AutoStart)
-		{
-	    	input_string(ANIM_WIN, "Enter player name:", term->player_name, 0,
-				 line, INT_FONT, MAXPNAME /*MAX_STRING - 1*/);
-		}
+	  if (!command_options.AutoStart)
+  	  {
+	    input_string(ANIM_WIN, "Welcome to xtank!  Enter your name :", term->player_name, 0,
+			 line, INT_FONT, MAXPNAME /*MAX_STRING - 1*/);
+	  } else {
+	    strcpy(term->player_name, vid->display_name);
+	  }
 	}
 	else
 	{
@@ -1958,7 +1962,8 @@ get_player_info()
         if (command_options.AutoStart && duplicate)
 		{
 			puts("Duplicate names specified but not allowed!");
-			exit(1);
+			break;
+			/* exit(1); */
 		}
     }
     while (duplicate);
@@ -1980,6 +1985,10 @@ get_player_info()
 	menu_resize(&menu_sys, VEHICLES_MENU, num_vdescs); /* GHS 9/12/90 - kludge */
     }				/* GHS 9/12/90 - kludge */
     term->mouse_speed = vid->kludge.mouse_speed;
+
+    display_mesg2(ANIM_WIN, "Waiting for other players.",
+		  0, line + 1, INT_FONT);
+    flush_output();
 }
 
 input_filename(iWindow, pcPrevFileName, pcFileName, iLineNum, iFont, iMaxLen)
@@ -2486,14 +2495,14 @@ Boolean gleams;
   
 
     draw_text(ANIM_WIN, XTANK_X, XTANK_Y + offset_y + 8,
-	      "Copyright 1988 by Terry Donahue", L_FONT, DRAW_COPY, WHITE);
+	      "Copyright 1988 by Terry Donahue", INT_FONT, DRAW_COPY, WHITE);
 
     draw_text(ANIM_WIN, XTANK_X, XTANK_Y + offset_y + 25,
-	      version1, L_FONT, DRAW_COPY, WHITE);
+	      version1, INT_FONT, DRAW_COPY, WHITE);
     draw_text(ANIM_WIN, XTANK_X, XTANK_Y * 15 + offset_y - 17,
-	      version2, L_FONT, DRAW_COPY, WHITE);
+	      version2, INT_FONT, DRAW_COPY, WHITE);
     draw_text(ANIM_WIN, XTANK_X, XTANK_Y * 15 + offset_y,
-	      version3, L_FONT, DRAW_COPY, WHITE);
+	      version3, INT_FONT, DRAW_COPY, WHITE);
 
     if (gleams == FALSE)
 	return;
@@ -2594,6 +2603,8 @@ Boolean gleams;
     for (sweep = XTANK_X - offset_x; sweep < XTANK_X + width * 1.2;
 	 sweep += GLEAM_SPEED)
     {
+        sync_output(TRUE);
+	usleep(20);
 	for (i = 0; i < NUM_GLEAMS; i++)
 	{
 	    if (num[i] == num_pics)

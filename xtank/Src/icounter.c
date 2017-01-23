@@ -86,6 +86,9 @@ void increment_time()
 #ifdef mmax
 	sigset(SIGVTALRM, increment_time);
 #endif
+#ifdef linux
+	signal(SIGVTALRM, increment_time);
+#endif
 }
 
 #if defined(MOTOROLA) && defined(m68k)
@@ -145,6 +148,10 @@ static Boolean real_timer_expired = TRUE;
 void sigalrm_handler()
 {
 	real_timer_expired = TRUE;
+#ifdef linux
+	/* Reinstall the sigalrm_handler each time */
+	signal(SIGALRM, sigalrm_handler);
+#endif
 }
 
 #if defined(MOTOROLA) && defined(m88k)

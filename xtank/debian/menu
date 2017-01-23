@@ -1,0 +1,2 @@
+?package(xtank-north):needs=X11 section=Games/Arcade \
+  title="xtank" command="/usr/games/xtank/xtank.linux"

@@ -820,6 +820,16 @@ unsigned int status;
 }
 
 /* these two message arrays must have the same size: */
+#ifdef S800x600
+char *help_normal[] = {
+  "MOUSE                 WEAPONS                 MOTOR                     STEERING                    GAME      ",
+  "                                                                                                              ",
+  "left   fire           space  fire             0-9  set forward speed    z   safe cornering on/off   Q  Quit   ",
+  "middle turn turret    t      turn turret      v/x  speed up/down        g   turn tank               P  Pause  ",
+  "right  turn tank      =      on/off switch    -    full reverse                                               ",
+  ""
+};
+#else
 char *help_normal[] = {
 	"BASIC FUNCTIONS                                       DISC CONTROL           GAME FUNCTIONS         3D FUNCTIONS            SYNC CONTROL",
 	"space  fire weapons (left)     C   toggle console     s   spin <=            Q   quit game          T   toggle 3D view      i   every frame",
@@ -832,6 +842,7 @@ char *help_normal[] = {
 	"return send message            v   speed up",
 	"                               x   slow down",
 };
+#endif
 char *help_battle[] = {
 	"0-9     track vehicle",
 	"button  move view",
@@ -875,7 +886,6 @@ unsigned int status;
     }
 }
 
-#ifdef S1024x864
 #define VEH_X 1
 #define VEH_Y 0
 #define VEHICLE_H 46
@@ -902,7 +912,6 @@ unsigned int status;
 #define PIC_Y   50
 #define EXP_PIC_Y    -13
 #define TEXT_OFFSET  48
-#endif
 
 /*
 ** Displays pictures of all bodies, bullets, explosions, and landmarks.

@@ -1,0 +1,178 @@
+diff -c -r Xtank.old/Imakefile.Config Xtank/Imakefile.Config
+*** Xtank.old/Imakefile.Config	Sun Sep 20 14:35:02 1992
+--- Xtank/Imakefile.Config	Sun Sep 20 15:33:39 1992
+***************
+*** 236,241 ****
+--- 236,247 ----
+  /**/# Start of System Dependent Things
+  /**/# (e.g. special options for your particular hardware and installation)
+  
++ #ifdef LinuxArchitecture
++    ARCH_DEFINES = -DMULTI_SYNC -DTHREAD_MP -DDYNALOAD -Dconst=""
++    XTANK_TARGET = xtank.linux
++     CDEBUGFLAGS = -O3
++              CC = cc
++ #endif
+  #ifdef __386BSD__
+     ARCH_DEFINES = -DMULTI_SYNC -DTHREAD_MP
+     XTANK_TARGET = xtank.386bsd
+diff -c -r Xtank.old/Src/Include/thread.h Xtank/Src/Include/thread.h
+*** Xtank.old/Src/Include/thread.h	Mon Sep  7 11:51:02 1992
+--- Xtank/Src/Include/thread.h	Sun Sep 20 15:52:38 1992
+***************
+*** 11,16 ****
+--- 11,19 ----
+  $Id: thread.h,v 2.15 1992/09/07 18:50:50 lidl Exp $
+  
+  $Log: thread.h,v $
++  * Revision 2.16  1992/09/20  14:40:00  sinster
++  * added support for linux systems
++  *
+   * Revision 2.15  1992/09/07  18:50:50  lidl
+   * started support for 386bsd systems
+   *
+***************
+*** 134,140 ****
+  #  define longjmp _longjmp
+  # endif
+  
+! # if defined(mips) || defined(mmax) || defined(MOTOROLA) || defined(__hp9000s800) || defined(__386BSD__)
+  typedef struct _Thd
+  {
+  	jmp_buf	state;		/* Current state of thread */
+--- 137,143 ----
+  #  define longjmp _longjmp
+  # endif
+  
+! # if defined(mips) || defined(mmax) || defined(MOTOROLA) || defined(__hp9000s800) || defined(__386BSD__) || defined(linux)
+  typedef struct _Thd
+  {
+  	jmp_buf	state;		/* Current state of thread */
+diff -c -r Xtank.old/Src/Programs/Buddy.h Xtank/Src/Programs/Buddy.h
+*** Xtank.old/Src/Programs/Buddy.h	Sun Sep  6 16:45:30 1992
+--- Xtank/Src/Programs/Buddy.h	Sun Sep 20 14:58:06 1992
+***************
+*** 57,63 ****
+  */
+  
+  #ifdef __GNUC__
+! # ifdef __STDC__
+  #  define Inline __inline
+  # else
+  #  define Inline inline
+--- 57,63 ----
+  */
+  
+  #ifdef __GNUC__
+! # ifndef __STDC__
+  #  define Inline __inline
+  # else
+  #  define Inline inline
+diff -c -r Xtank.old/Src/file.c Xtank/Src/file.c
+*** Xtank.old/Src/file.c	Sun Sep 13 18:06:56 1992
+--- Xtank/Src/file.c	Sun Sep 20 15:40:07 1992
+***************
+*** 128,133 ****
+--- 128,136 ----
+  #include "vstructs.h"
+  #ifdef UNIX
+  #include <sys/param.h>
++ # ifdef linux
++ # define MAXNAMLEN NAME_MAX
++ # endif
+  #ifndef __hpux
+  #include <sys/dir.h>
+  #endif
+diff -c -r Xtank.old/Src/icounter.c Xtank/Src/icounter.c
+*** Xtank.old/Src/icounter.c	Sun Aug 30 18:51:46 1992
+--- Xtank/Src/icounter.c	Sun Sep 20 16:24:04 1992
+***************
+*** 86,91 ****
+--- 86,94 ----
+  #ifdef mmax
+  	sigset(SIGVTALRM, increment_time);
+  #endif
++ #ifdef linux
++ 	signal(SIGVTALRM, increment_time);
++ #endif
+  }
+  
+  #if defined(MOTOROLA) && defined(m68k)
+***************
+*** 145,150 ****
+--- 148,157 ----
+  void sigalrm_handler()
+  {
+  	real_timer_expired = TRUE;
++ #ifdef linux
++ 	/* Reinstall the sigalrm_handler each time */
++ 	signal(SIGALRM, sigalrm_handler);
++ #endif
+  }
+  
+  #if defined(MOTOROLA) && defined(m88k)
+diff -c -r Xtank.old/Src/thread.c Xtank/Src/thread.c
+*** Xtank.old/Src/thread.c	Sat Sep 12 23:49:29 1992
+--- Xtank/Src/thread.c	Sun Sep 20 15:55:30 1992
+***************
+*** 11,16 ****
+--- 11,19 ----
+  $Id: thread.c,v 2.22 1992/09/13 06:49:20 lidl Exp $
+  
+  $Log: thread.c,v $
++  * Revision 2.23  1992/09/20  14:37:00  sinster
++  * added Linux threading
++  *
+   * Revision 2.22  1992/09/13  06:49:20  lidl
+   * fixed the 386BSD threading
+   *
+***************
+*** 261,266 ****
+--- 264,274 ----
+  	/* this doesn't work quite right, yet */
+  	thd->state[2] = bufend & ~3;
+  	thd->state[3] = bufend & ~3;
++ #endif
++ 
++ #ifdef linux
++ 	/* Stack grows downwards.  Align to 32-bit boundary */
++ 	thd->state->__jmpbuf->__sp = bufend & ~3;
+  #endif
+  
+  #if defined(sequent) && defined(i386)
+diff -c -r Xtank.old/Src/vehicle.c Xtank/Src/vehicle.c
+*** Xtank.old/Src/vehicle.c	Sun Sep 13 00:04:47 1992
+--- Xtank/Src/vehicle.c	Sun Sep 20 16:14:40 1992
+***************
+*** 324,330 ****
+  /* 
+   * Try this if you don't have cbrt in your library...
+   */
+! #if defined(sequent) || defined(__hpux)
+  # define cbrt(n) pow(n, 1.0/3.0)
+  #endif
+  
+--- 324,330 ----
+  /* 
+   * Try this if you don't have cbrt in your library...
+   */
+! #if defined(sequent) || defined(__hpux) || defined(linux)
+  # define cbrt(n) pow(n, 1.0/3.0)
+  #endif
+  
+*** Xtank.old/Src/unix.c	Thu Oct 29 08:14:36 1992
+--- Xtank/Src/unix.c	Thu Oct 29 08:05:15 1992
+***************
+*** 369,375 ****
+--- 369,379 ----
+  
+  #ifdef DEBUG
+  # ifndef mips
++ #  ifdef linux
++     printf("Magic number: %o\n", N_MAGIC(hdr));
++ #  else
+      printf("Magic number: %o\n", hdr.a_magic);
++ #  endif
+      printf("Text          %d\n", hdr.a_text);
+      printf("Data          %d\n", hdr.a_data);
+      printf("BSS           %d\n", hdr.a_bss);

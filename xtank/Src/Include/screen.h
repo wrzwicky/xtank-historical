@@ -78,6 +78,51 @@ $Log: screen.h,v $
 #define STAT_BORDER	2
 #endif
 
+#ifdef S800x600
+/* Window geometry information */
+#define DIM_X 800
+#define DIM_Y 600
+#define BORDER          1
+
+#define ANIM_WIN_X        0
+#define ANIM_WIN_Y        0
+#define ANIM_WIN_HEIGHT   (DIM_Y-50-(2*BORDER))
+#define ANIM_WIN_WIDTH    ANIM_WIN_HEIGHT
+
+#define HELP_WIN_X        0
+#define HELP_WIN_Y        ANIM_WIN_HEIGHT+BORDER
+#define HELP_WIN_WIDTH    (ANIM_WIN_WIDTH-BORDER)
+#define HELP_WIN_HEIGHT   (DIM_Y-HELP_WIN_Y-(4*BORDER))
+
+#define MAP_WIN_X         ANIM_WIN_WIDTH
+#define MAP_WIN_Y         0
+#define MAP_WIN_WIDTH     (DIM_X-ANIM_WIN_WIDTH-(2*BORDER))
+#define MAP_WIN_HEIGHT    MAP_WIN_WIDTH
+
+#define CONS_WIN_X        ANIM_WIN_WIDTH
+#define CONS_WIN_Y        (MAP_WIN_Y + MAP_WIN_HEIGHT)
+#define CONS_WIN_WIDTH    (DIM_X-ANIM_WIN_WIDTH-(2*BORDER))
+#define CONS_WIN_HEIGHT   280
+
+#define MSG_WIN_X         ANIM_WIN_WIDTH
+#define MSG_WIN_Y         (CONS_WIN_Y+CONS_WIN_HEIGHT)
+#define MSG_WIN_WIDTH     (DIM_X-ANIM_WIN_WIDTH-(2*BORDER))
+#define MSG_WIN_HEIGHT    (DIM_Y-MSG_WIN_Y-(2*BORDER))
+
+#define GAME_WIN_X        DIM_X
+#define GAME_WIN_Y        DIM_Y
+#define GAME_WIN_WIDTH    DIM_X-ANIM_WIN_WIDTH
+#define GAME_WIN_HEIGHT   192
+
+/* Battle windows.  Not always mapped */
+#define STAT_WIN_X	DIM_X
+#define STAT_WIN_Y	0
+#define STAT_WIN_WIDTH	200
+#define STAT_WIN_HEIGHT	97
+
+#define STAT_BORDER	1
+#endif
+
 #ifdef S640x400
 /* Window geometry information */
 #define ANIM_WIN_X        0
@@ -86,7 +131,7 @@ $Log: screen.h,v $
 #define ANIM_WIN_HEIGHT   400
 
 #define HELP_WIN_X        0
-#define HELP_WIN_Y        310
+#define HELP_WIN_Y        400
 #define HELP_WIN_WIDTH    638
 #define HELP_WIN_HEIGHT   88
 
@@ -105,8 +150,8 @@ $Log: screen.h,v $
 #define MAP_WIN_WIDTH     238
 #define MAP_WIN_HEIGHT    238
 
-#define MSG_WIN_X         0
-#define MSG_WIN_Y         0
+#define MSG_WIN_X         400
+#define MSG_WIN_Y         310
 #define MSG_WIN_WIDTH     238
 #define MSG_WIN_HEIGHT    88
 

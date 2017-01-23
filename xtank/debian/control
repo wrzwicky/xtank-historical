@@ -1,0 +1,15 @@
+Source: xtank-north
+Section: games
+Priority: optional
+Maintainer: James Cameron <quozl@us.netrek.org>
+Standards-Version: 3.0.1
+Build-depends: xlibs-dev, gcc-2.95
+
+Package: xtank-north
+Architecture: any
+Depends: ${shlibs:Depends}
+Description: Multi-player 2D tanks in maze game for X
+ Xtank is a multi-player tank game.  Players control a tank each,
+ which can move around a maze fighting other players.  Presentation is
+ in two dimensions, top down.  A rich selection of vehicles, mazes,
+ and robot tanks is included.

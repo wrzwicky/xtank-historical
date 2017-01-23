@@ -128,6 +128,9 @@ $Log: file.c,v $
 #include "vstructs.h"
 #ifdef UNIX
 #include <sys/param.h>
+# ifdef linux
+# define MAXNAMLEN NAME_MAX
+# endif
 #ifndef __hpux
 #include <sys/dir.h>
 #endif

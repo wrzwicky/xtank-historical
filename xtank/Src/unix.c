@@ -369,7 +369,11 @@ struct nlist nl[3];
 
 #ifdef DEBUG
 # ifndef mips
+#  ifdef linux
+    printf("Magic number: %o\n", N_MAGIC(hdr));
+#  else
     printf("Magic number: %o\n", hdr.a_magic);
+#  endif
     printf("Text          %d\n", hdr.a_text);
     printf("Data          %d\n", hdr.a_data);
     printf("BSS           %d\n", hdr.a_bss);

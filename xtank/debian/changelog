@@ -1,0 +1,18 @@
+xtank-north (0.2-1) unstable; urgency=low
+
+  * rebuild for sarge, to fix inability to install due to xlibs6g
+    package dependency
+  * add /usr/bin/xtank script to start game
+  * adjust for changed host names on local area network
+
+ -- James Cameron <quozl@us.netrek.org>  Sat, 21 Aug 2004 17:20:09 +1000
+
+xtank-north (0.1-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- James Cameron <quozl@us.netrek.org>  Mon, 29 Jan 2001 05:57:27 +1100
+
+Local variables:
+mode: debian-changelog
+End:

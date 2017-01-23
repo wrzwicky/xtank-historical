@@ -57,7 +57,7 @@ $Log: Buddy.h,v $
 */
 
 #ifdef __GNUC__
-# ifdef __STDC__
+# ifndef __STDC__
 #  define Inline __inline
 # else
 #  define Inline inline

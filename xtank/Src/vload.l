@@ -5,7 +5,7 @@
 */
 
 /* $Id: vload.l,v 1.9 1992/09/12 09:42:26 aahz Exp $ */
-
+%option noyywrap
 %{
 #ifdef YY_DECL
 #undef YY_DECL

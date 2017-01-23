@@ -1,0 +1,41 @@
+xtank: 114336
+Maze: hassault4
+Game: Race
+Point Bullets: 0
+Ricochet: 0
+Rel Fire: 1
+No Wear: 0
+Restart: 1
+Commentator: 0
+Full Map: 0
+Pay To Play: 0
+Robots Don't Win: 0
+Max Armor Scale: 0
+Nametags: 0
+No Radar: 0
+Team Score: 1
+Player Teleport: 1
+Disc Teleport: 1
+Teleport From Team: 1
+Teleport From Neutral: 0
+Teleport To Team: 1
+Teleport To Neutral: 1
+Teleport Any To Any: 0
+War Goals Only: 1
+Relative Disc: 0
+Ultimate Own Goal: 1
+Winning Score: 10000
+Outpost Strength: 5
+Scroll Speed: 5.000000
+Box slowdown: 0.500000
+Disc Friction: 0.990000
+Disc Speed: 0.400000
+Disc Damage: 0.000000
+Disc Heat: 1.000000
+Owner Slowdown: 0.300000
+Slip Friction: 0.500000
+Normal Friction: 1.000000
+Shocker Walls: 1
+Difficulty: 0
+Tanks: 1
+V#0:	Jander,	jander:0.0,	Vanguard,	Red,	0,	NONE

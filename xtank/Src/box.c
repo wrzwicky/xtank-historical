@@ -231,6 +231,8 @@ Box *b;
 			if (v->owner->money >= cost && v->fuel < v->max_fuel)
 			{
 				v->fuel++;
+				if (!rnd(2))
+				  explode_location(v->loc, rnd(2), EXP_EXHAUST);
 				v->owner->money -= cost;
 			}
 			break;
@@ -271,6 +273,8 @@ Box *b;
 						    w->status &= ~WS_no_ammo;
 						    v->owner->money -= (ws->ammo_cost * get);
 						    w->ammo += get;
+						    if (!rnd(2))
+						      explode_location(v->loc, rnd(2), EXP_EXHAUST);
 						}
                                         } else 
 					    if (w->refill_counter != 1)
@@ -280,6 +284,8 @@ Box *b;
 						w->refill_counter = weapon_stat[(int) w->type].refill_time;
 
 						w->ammo++;
+						if (!rnd(2))
+						  explode_location(v->loc, rnd(2), EXP_EXHAUST);
 						w->status &= ~WS_no_ammo;
 						v->owner->money -= ws->ammo_cost;
 					}
@@ -304,7 +310,7 @@ Box *b;
 					v->owner->money -= cost;
 
 					/* Make a gleam or two every now and then */
-					if (!rnd(30))
+					if (!rnd(5))
 						explode_location(v->loc, rnd(2), EXP_GLEAM);
 				}
 			}

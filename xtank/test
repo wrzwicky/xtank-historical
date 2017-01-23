@@ -1,0 +1,44 @@
+xtank: 114336
+Maze: hrace6
+Game: Race
+Point Bullets: 1
+Ricochet: 0
+Rel Fire: 1
+No Wear: 1
+Restart: 1
+Commentator: 0
+Full Map: 0
+Pay To Play: 0
+Robots Don't Win: 0
+Max Armor Scale: 0
+Nametags: 0
+No Radar: 0
+Team Score: 1
+Player Teleport: 1
+Disc Teleport: 1
+Teleport From Team: 1
+Teleport From Neutral: 0
+Teleport To Team: 1
+Teleport To Neutral: 1
+Teleport Any To Any: 0
+War Goals Only: 1
+Relative Disc: 0
+Ultimate Own Goal: 1
+Winning Score: 20000
+Outpost Strength: 0
+Scroll Speed: 5.000000
+Box slowdown: 0.500000
+Disc Friction: 0.990000
+Disc Speed: 0.400000
+Disc Damage: 0.000000
+Disc Heat: 1.000000
+Owner Slowdown: 0.300000
+Slip Friction: 0.500000
+Normal Friction: 1.000000
+Shocker Walls: 0
+Difficulty: 0
+Tanks: 4
+V#0:	quozl,	:0,	Kamikaze,	Red,	0,	NON1
+V#1:	jander,	j:0,	Kamikaze,	Orange,	0,	NON2
+V#2:	test,	t:0,	Kamikaze,	Yellow,	0,	NON3
+V#3:	daneel,	d:0,	Kamikaze,	Green,	0,	NON4

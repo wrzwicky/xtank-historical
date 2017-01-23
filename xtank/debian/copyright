@@ -1,0 +1,28 @@
+This package was debianized by James Cameron <quozl@us.netrek.org> on
+Mon, 29 Jan 2001 05:57:27 +1100.
+
+It was downloaded from (to be determined)
+
+Upstream Author(s): Terry Donahue
+
+Copyright:
+
+Xtank is copyright 1988 by Terry Donahue.
+
+All rights are reserved, except for the following:
+
+Anyone can modify X-Tank and redistribute the modified version provided
+they do so free of charge and do not omit this file from the distribution.
+
+There is no warranty for X-Tank.  It is provided as is.  I have no 
+responsibility for any problems or damages caused by use of X-Tank.
+
+Questions, bug reports, modifications, etc can be sent to any of the
+following addresses:
+
+        stripes@eng.umd.edu
+        lidl@eng.umd.edu
+        aahz@eng.umd.edu
+
+The latest release of X-Tank is available via anonymous ftp
+on ftp.eng.umd.edu, in the /pub/xtank directory.
