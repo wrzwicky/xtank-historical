@@ -1,0 +1,46 @@
+***************
+*** 1,9 ****
+  /*
+  **  This is the object file for all bullets.
+  */
+! 
+  #define all_bullets_views 18
+  
+  #define OURSTUFF
+  
+  static Picture all_bullets_pic[all_bullets_views] = {
+--- 1,12 ----
+  /*
+  **  This is the object file for all bullets.
+  */
+! #ifdef NO_NEW_RADAR
+  #define all_bullets_views 18
++ #else /* NO_NEW_RADAR */
++ #define all_bullets_views 19
++ #endif /* NO_NEW_RADAR */
+  
+  #define OURSTUFF
+  
+  static Picture all_bullets_pic[all_bullets_views] = {
+***************
+*** 27,34 ****
+        { 5, 5, 2, 2 },
+  #endif
+        { 7, 7, 3, 3 },
+        { 9, 9, 4, 4 },
+        { 15, 15, 7, 7 }
+  };
+  
+  static Object all_bullets_obj = {
+--- 30,40 ----
+        { 5, 5, 2, 2 },
+  #endif
+        { 7, 7, 3, 3 },
+        { 9, 9, 4, 4 },
++ #ifndef NO_NEW_RADAR
++       { 7, 7, 3, 3 },
++ #endif /* !NO_NEW_RADAR */
+        { 15, 15, 7, 7 }
+  };
+  
+  static Object all_bullets_obj = {
