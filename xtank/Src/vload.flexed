@@ -171,7 +171,7 @@ typedef struct zz_buffer_state *YY_BUFFER_STATE;
 ** Written by Gordon Smith (aahz@eng.umd.edu)
 ** Hacked on a bit by lidl@pix.com
 */
-/* $Id: vload.l,v 1.8 1992/09/06 22:15:00 lidl Exp $ */
+/* $Id: vload.l,v 1.9 1992/09/12 09:42:26 aahz Exp $ */
 # line 10 "vload.l"
 #ifdef YY_DECL
 #undef YY_DECL
@@ -1290,7 +1290,9 @@ char *vstr;
 int *addr;
 int *max_addr;
 {
-	int v = atoi(vstr);
+	int v;
+
+	v = atoi(vstr);
 
 	if (v > *max_addr) {
 		*max_addr = v;
