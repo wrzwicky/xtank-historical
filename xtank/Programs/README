@@ -1,9 +1,0 @@
-This directory contains programs to dynamically link into Xtank.
-
-Old programs that probably don't work with the current Xtank are in the Old
-directory.
-
-Example programs:
-
-	minimal.c	the smallest possible Xtank program
-	spider.c	a slightly more useful example, actually fights

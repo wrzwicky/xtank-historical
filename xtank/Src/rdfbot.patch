@@ -1,0 +1,63 @@
+From nabil@qiclab.scn.rain.com Mon Sep 14 05:21:07 1992
+Return-Path: <nabil@qiclab.scn.rain.com>
+Received: from qiclab.scn.rain.com ([147.28.0.97]) by Pix.COM (4.1/SMI/Pix-4.1)
+	id AA25517; Mon, 14 Sep 92 05:20:52 EDT
+Received: by qiclab.scn.rain.com (/\==/\ Smail3.1.24.1 #24.5)
+	id <m0mUCZX-000UN4C@qiclab.scn.rain.com>; Mon, 14 Sep 92 02:18 PDT
+Message-Id: <m0mUCZX-000UN4C@qiclab.scn.rain.com>
+From: nabil@qiclab.scn.rain.com (Aaron Nabil)
+Subject: rdfbot patches
+To: lidl@Pix.COM, stripes@Pix.COM, aahz@eng.umd.edu,
+        thoth@lightning.cis.ufl.edu, potter@silver.lcs.mit.edu,
+        seth@ctr.columbia.edu, wk5w@virginia.edu, senft@Pix.COM,
+        nabil@cse.ogi.edu, bwoodall@bilbo.Qualcomm.COM
+Date: Mon, 14 Sep 92 2:18:18 PDT
+Reply-To: nabil@cse.ogi.edu
+X-Mailer: ELM [version 2.4dev PL32]
+Status: OR
+
+sorry for the mixup, I copied the wrong version of rdfbot in the diffs
+I sent kurt.  Here are the diffs, which are also uploaded to incoming
+on ftp.eng.umd.edu as rdfbot_patch.Z
+
+-- 
+Aaron
+nabil@cse.ogi.edu
+
+(snip, snip...)
+*** ../../3fREF/Programs/rdfbot.c	Sun Sep 13 00:12:58 1992
+--- rdfbot.c	Mon Sep 14 00:55:44 1992
+***************
+*** 6,11 ****
+--- 6,14 ----
+   *
+   * Give the vehicle rdf and send it a ACK message for
+   * it to dump state.
++  *
++  * Test vehicle must not have radar or newradar, as these
++  * start up activated and will prevent RDF from working.
+   */
+  
+  /*
+***************
+*** 15,23 ****
+  #include <stdio.h>
+  #include "xtanklib.h"
+  
+! static void main();
+  
+! Prog_desc tagman_prog = {
+  	"rdfbot",
+  	"Any",
+  	"Demonstrator for RDF interface",
+--- 18,26 ----
+  #include <stdio.h>
+  #include "xtanklib.h"
+  
+! static void rdfbot_main();
+  
+! Prog_desc rdfbot_prog = {
+  	"rdfbot",
+  	"Any",
+  	"Demonstrator for RDF interface",
+
